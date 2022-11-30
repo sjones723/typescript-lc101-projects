@@ -1,5 +1,6 @@
 // URL for the instructions:
 // https://education.launchcode.org/intro-to-professional-web-dev/chapters/typescript/exercises.html
+import { SpaceLocation } from "./SpaceLocation";
 
 // Part 1: Declare (5) Variables With Type
 let prevspacecraftName: string = "Determination";
@@ -53,34 +54,39 @@ class Spacecraft {
   milesPerKilometer: number = 0.621;
   craftName: string;
   speedMph: number;
-  
-  constructor(craftName: string, speedMph: number;) {
+
+  constructor(craftName: string, speedMph: number) {
     this.craftName = craftName;
     this.speedMph = speedMph;
   }
   getDaysToLocation(kilometersAway: number): number {
-    let milesTo = kilometersAway * milesPerKilometer;
+    let milesTo = kilometersAway * this.milesPerKilometer;
     let hoursTo = milesTo / this.speedMph;
     let numOfDaysToLocation = hoursTo / 24;
 
     return numOfDaysToLocation;
   }
-  
+  printDaysToLocation(location: SpaceLocation) {
+    console.log(
+      `${this.craftName} would take ${this.getDaysToLocation(
+        location.kilometersAway
+      )} days to get to ${location.name}.`
+    );
+  }
 }
 
-let spaceShuttle = new Spacecraft('Determination', 17500);
-
+let spaceShuttle = new Spacecraft("Determination", 17500);
 
 // Move your output statements from part 3 here. Update the template literals use the
 // instance of the class.
-console.log(`
-${spaceShuttle.craftName} would take ${spaceShuttle.getDaysToLocation(kilometersToMars)} days to get to Mars.
-`)
 
-console.log(`
-${spaceShuttle.craftName} would take ${spaceShuttle.getDaysToLocation(kilometersToTheMoon)} days to get to the Moon.
-`)
+// console.log(`
+// ${spaceShuttle.craftName} would take ${spaceShuttle.getDaysToLocation(kilometersToMars)} days to get to Mars.
+// `)
 
+// console.log(`
+// ${spaceShuttle.craftName} would take ${spaceShuttle.getDaysToLocation(kilometersToTheMoon)} days to get to the Moon.
+// `)
 
 // Part 5: Export and Import the SpaceLocation Class
 // Add the required import statement BEFORE the part 1 concent.
@@ -88,3 +94,7 @@ ${spaceShuttle.craftName} would take ${spaceShuttle.getDaysToLocation(kilometers
 // Add the printDaysToLocation function to the Spacecraft class.
 
 // Paste in the code from step 6 here:
+spaceShuttle.printDaysToLocation(new SpaceLocation("Mars", kilometersToMars));
+spaceShuttle.printDaysToLocation(
+  new SpaceLocation("the Moon", kilometersToTheMoon)
+);
